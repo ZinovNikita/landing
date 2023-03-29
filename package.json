@@ -1,0 +1,27 @@
+{
+  "name": "landing",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZinovNikita/landing.git"
+  },
+  "author": "ZinovNikita",
+  "licenses" : [
+    {
+      "type": "Apache-2.0",
+      "url": "https://opensource.org/licenses/apache2.0.php"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/ZinovNikita/landing/issues"
+  },
+  "homepage": "https://github.com/ZinovNikita/landing#readme"
+}
