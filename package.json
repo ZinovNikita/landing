@@ -1,27 +1,38 @@
 {
   "name": "landing",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "scripts": {
-    "build": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "ZinovNikita",
+  "homepage": "https://github.com/ZinovNikita/landing#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZinovNikita/landing.git"
   },
-  "author": "ZinovNikita",
+  "bugs": {
+    "url": "https://github.com/ZinovNikita/landing/issues"
+  },
   "licenses" : [
     {
       "type": "Apache-2.0",
       "url": "https://opensource.org/licenses/apache2.0.php"
     }
   ],
-  "bugs": {
-    "url": "https://github.com/ZinovNikita/landing/issues"
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
   },
-  "homepage": "https://github.com/ZinovNikita/landing#readme"
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1",
+    "vue-tsc": "^1.2.0"
+  }
 }
