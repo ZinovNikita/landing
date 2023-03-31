@@ -18,11 +18,12 @@ export default defineConfig({
     vue(),
     renameIndexPlugin(),
   ],
+  base: "/landing",
   build: {
     outDir: './docs',
     rollupOptions: {
       output: {
-        dir: 'docs',
+        dir: './docs',
         assetFileNames: 'assets/[name].[ext]',
         entryFileNames: 'assets/[name].js',
       },
