@@ -1,7 +1,7 @@
 {
-  "name": "landing",
+  "name": "json-bp",
   "version": "0.0.0",
-  "description": "",
+  "description": "building business process interfaces",
   "author": "ZinovNikita",
   "homepage": "https://github.com/ZinovNikita/landing#readme",
   "repository": {
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/ZinovNikita/landing/issues"
   },
-  "licenses" : [
+  "licenses": [
     {
       "type": "Apache-2.0",
       "url": "https://opensource.org/licenses/apache2.0.php"
@@ -27,9 +27,12 @@
     "doc": "docs"
   },
   "dependencies": {
+    "ant-design-vue": "^4.0.0",
+    "jsoneditor": "^9.10.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@types/jsoneditor": "^9.9.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.1",
