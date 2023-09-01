@@ -1,35 +1,11 @@
-import { defineConfig, PluginOption } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
-const renameIndexPlugin = () : PluginOption => {
-  return {
-    name: 'renameIndex',
-    enforce: 'post',
-    generateBundle(_, bundle) {
-      const indexHtml = bundle['index.html']
-      indexHtml.fileName = '404.html'
-    }
-  }
-}
-
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 3000
   },
   plugins: [
-    vue(),
-    renameIndexPlugin(),
+    vue()
   ],
-  //base: "/landing",
-  build: {
-    outDir: './docs',
-    rollupOptions: {
-      output: {
-        dir: './docs',
-        assetFileNames: 'assets/[name].[ext]',
-        entryFileNames: 'assets/[name].js',
-      },
-    }
-  }
+  base: "/landing"
 })
