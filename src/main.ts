@@ -10,7 +10,7 @@ import 'ant-design-vue/dist/reset.css';
 import './style.css'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/landing'),
   routes
 })
 
