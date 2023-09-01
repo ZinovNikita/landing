@@ -1,12 +1,15 @@
 {
-  "name": "json-bp",
+  "name": "landing",
   "version": "0.0.0",
-  "description": "building business process interfaces",
+  "description": "",
   "author": "ZinovNikita",
-  "homepage": "https://github.com/ZinovNikita/landing#readme",
+  "homepage": "https://zinovnikita.github.io/landing/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZinovNikita/landing.git"
+  },
+  "customParams": {
+    "base": "/landing"
   },
   "bugs": {
     "url": "https://github.com/ZinovNikita/landing/issues"
@@ -36,6 +39,7 @@
   },
   "devDependencies": {
     "@types/jsoneditor": "^9.9.0",
+    "@types/node": "^20.5.8",
     "@vitejs/plugin-vue": "^4.1.0",
     "gh-pages": "^6.0.0",
     "typescript": "^5.0.2",
