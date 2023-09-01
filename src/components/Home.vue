@@ -18,6 +18,6 @@ const connect = (user_hash: string, room_hash: string = 'new' ) => {
     return alert('Укажите комнату')
   localStorage.setItem('room_hash', room_hash)
   localStorage.setItem('user_hash', user_hash)
-  router.push({ path: `/landing/rooms/${room_hash}` })
+  router.push({ path: `/rooms/${room_hash}` })
 }
 </script>
