@@ -14,11 +14,14 @@ const renameIndexPlugin = () : PluginOption => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 3000
+  },
   plugins: [
     vue(),
     renameIndexPlugin(),
   ],
-  base: "/landing",
+  //base: "/landing",
   build: {
     outDir: './docs',
     rollupOptions: {
