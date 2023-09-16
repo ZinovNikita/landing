@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@babylonjs/core": "^6.19.1",
+    "@babylonjs/materials": "^6.20.0",
     "ant-design-vue": "^4.0.0",
     "jsoneditor": "^9.10.2",
     "sass": "^1.66.1",

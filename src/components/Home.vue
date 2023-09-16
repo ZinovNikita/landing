@@ -38,6 +38,7 @@
     <a-button type="primary" size="large" @click="currentStep = 1">Далее</a-button>
   </template>
   <template v-if="currentStep === 1">
+    <a-input size="large" v-model:value="websocket_host"/>
     <a-button type="dashed" size="large" @click="currentStep = 0">Назад</a-button>
     <a-button size="large" @click="currentStep = 2">Пропустить</a-button>
     <a-button type="primary" size="large" @click="create">Создать</a-button>
@@ -54,6 +55,7 @@ import { useRouter } from 'vue-router'
 
 const $router = useRouter()
 
+const websocket_host = ref(localStorage.getItem('websocket_host') || 'ws://localhost:3001')
 const room_hash = ref(localStorage.getItem('room_hash') || '')
 const body_color = ref(localStorage.getItem('body_color') || '#ff0000')
 const pants_color = ref(localStorage.getItem('pants_color') || '#0000ff')
@@ -65,7 +67,8 @@ const steps = [
   {key: 'step3', title: 'Подключиться к комнате'}
 ]
 
-watch([body_color, pants_color, skin_color], () => {
+watch([websocket_host, body_color, pants_color, skin_color], () => {
+  localStorage.setItem('websocket_host', websocket_host.value)
   localStorage.setItem('body_color', body_color.value)
   localStorage.setItem('pants_color', pants_color.value)
   localStorage.setItem('skin_color', skin_color.value)

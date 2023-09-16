@@ -76,8 +76,9 @@ wsServer.on('connection', ws => {
             console.log2(`${ws.user_hash} left room ${ws.room_hash}`)
           }
           ws.room_hash = hash
-          wsServer.sendMessage(`${action}.then`, ws.room_hash, ws.user_hash)
           console.log2(`${ws.user_hash} entered room ${ws.room_hash}`)
+          wsServer.sendMessage('entered', ws.room_hash, ws.user_hash)
+          wsServer.sendMessage(`${action}.then`, undefined, ws.user_hash, Array.from(wsServer.clients).map(c => c.user_hash).filter(c => c.user_hash !== ws.user_hash))
         }
       }
       else if(typeof action === 'string' && action.length > 0)

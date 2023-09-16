@@ -3,22 +3,34 @@ import type { Scene, AbstractMesh, MultiMaterial, PBRMaterial } from "@babylonjs
 
 type LegoMan = {
   model: AbstractMesh
+  user_hash: string
   Idle: () => void
   Walk: () => void
   setColors: (body: string, pants: string, skin: string) => void
 }
 
 class LegoManClass implements LegoMan {
-  static instance: LegoManClass
-  static async Init (scene: Scene) {
-    if (!LegoManClass.instance) {
-      const { meshes } = await SceneLoader.ImportMeshAsync('', '/landing/', "legoman.babylon", scene)
-      LegoManClass.instance = new LegoManClass(scene, meshes)
+  static instanceCount: number = 0
+  static animRotateL: Animation
+  static animRotateR: Animation
+  static meshes: AbstractMesh[]
+  static async Init (scene: Scene, user_hash?: string | null) {
+    if (!Array.isArray(LegoManClass.meshes) || LegoManClass.meshes.length === 0) {
+      const { meshes } = await SceneLoader.ImportMeshAsync('', '/landing/', "legoman.babylon")
+      LegoManClass.meshes = meshes.map(m => {
+        m.checkCollisions = true
+        return m
+      })
+      LegoManClass.animRotateL = new Animation(`animRotateL`, "rotation.x", 60, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE)
+      LegoManClass.animRotateL.setKeys([ { frame: 0,  value: 0 }, { frame: 15,  value: Math.PI / 4 }, { frame: 30,  value: 0 }, { frame: 45,  value: - Math.PI / 4 }, { frame: 60,  value: 0 } ])
+      LegoManClass.animRotateR = new Animation(`animRotateR`, "rotation.x", 60, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE)
+      LegoManClass.animRotateR.setKeys([ { frame: 0,  value: 0 }, { frame: 15,  value: - Math.PI / 4 }, { frame: 30,  value: 0 }, { frame: 45,  value: Math.PI / 4 }, { frame: 60,  value: 0 } ])
     }
-    return LegoManClass.instance
+    return new LegoManClass(scene, user_hash)
   }
 
   private _scene: Scene
+  private _user_hash: string
   private _Body: AbstractMesh
   private _HandL: AbstractMesh
   private _LegL: AbstractMesh
@@ -26,28 +38,24 @@ class LegoManClass implements LegoMan {
   private _LegR: AbstractMesh
   private _HandR: AbstractMesh
   
-  constructor (scene: Scene, meshes: AbstractMesh[]) {
+  constructor (scene: Scene, user_hash?: string | null) {
+    LegoManClass.instanceCount++
     this._scene = scene
-    if (meshes.length !== 6)
+    this._user_hash = user_hash || `user${LegoManClass.instanceCount}`
+    if (LegoManClass.meshes.length !== 6)
       throw new Error('wrong model')
 
-    this._Body = meshes[0]
-    this._HandL = meshes[1]
-    this._LegL = meshes[2]
-    this._Head = meshes[3]
-    this._LegR = meshes[4]
-    this._HandR = meshes[5]
+    this._Body = LegoManClass.meshes[0]
+    this._HandL = LegoManClass.meshes[1]
+    this._LegL = LegoManClass.meshes[2]
+    this._Head = LegoManClass.meshes[3]
+    this._LegR = LegoManClass.meshes[4]
+    this._HandR = LegoManClass.meshes[5]
 
-    const animRotateL = new Animation("animRotateL", "rotation.x", 60, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE),
-    animRotateR = new Animation("animRotateR", "rotation.x", 60, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CYCLE)
-
-    animRotateL.setKeys([ { frame: 0,  value: 0 }, { frame: 15,  value: Math.PI / 4 }, { frame: 30,  value: 0 }, { frame: 45,  value: - Math.PI / 4 }, { frame: 60,  value: 0 } ])
-    animRotateR.setKeys([ { frame: 0,  value: 0 }, { frame: 15,  value: - Math.PI / 4 }, { frame: 30,  value: 0 }, { frame: 45,  value: Math.PI / 4 }, { frame: 60,  value: 0 } ])
-
-    this._HandL.animations.push(animRotateL)
-    this._LegL.animations.push(animRotateR)
-    this._HandR.animations.push(animRotateR)
-    this._LegR.animations.push(animRotateL)
+    this._HandL.animations.push(LegoManClass.animRotateL)
+    this._LegL.animations.push(LegoManClass.animRotateR)
+    this._HandR.animations.push(LegoManClass.animRotateR)
+    this._LegR.animations.push(LegoManClass.animRotateL)
     
     this._Head.setParent(this._Body)
     this._HandL.setParent(this._Body)
@@ -58,6 +66,10 @@ class LegoManClass implements LegoMan {
 
   public get model () {
     return this._Body
+  }
+
+  public get user_hash (): string {
+    return this._user_hash
   }
 
   public setColors(body: string, pants: string, skin: string) {
