@@ -1,11 +1,16 @@
-
-import { WebSocketServer } from 'ws'
+import { createServer } from 'https';
+import { readFileSync } from 'fs';
+import { WebSocketServer } from 'ws';
 
 console.log2 = function (...args) { this.log(new Date().toLocaleString(), ...args) }
 console.error2 = function (...args) { this.error(new Date().toLocaleString(), ...args) }
 
-const wsServer = new WebSocketServer({ port: 3001 }),
-  isHash = s => typeof s === 'string' && s.length === 8 && !isNaN(parseInt(s, 36))
+const server = createServer({
+  cert: readFileSync('./cert/cert.pem'),
+  key: readFileSync('./cert/key.pem')
+}),
+wsServer = new WebSocketServer({ server }),
+isHash = s => typeof s === 'string' && s.length === 8 && !isNaN(parseInt(s, 36))
 
 wsServer.uniqId = function () {
   let hash
@@ -94,4 +99,5 @@ wsServer.on('connection', ws => {
   })
 })
 
-console.log2(`server start on ${wsServer.options.port} port`)
+server.listen(3001)
+console.log2(`server start on 3001 port`)

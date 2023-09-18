@@ -22,6 +22,9 @@
   ],
   "type": "module",
   "scripts": {
+    "cert0": "openssl req -x509 -newkey rsa:2048 -keyout ./cert/keytmp.pem -out ./cert/cert.pem -days 365",
+    "cert1": "openssl rsa -in ./cert/keytmp.pem -out ./cert/key.pem",
+    "cert": "mkdir cert && npm run cert0 && npm run cert1",
     "ws": "node websocket.js",
     "dev": "vite",
     "predeploy": "npm run build",
