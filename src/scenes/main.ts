@@ -1,4 +1,8 @@
-import { Engine, Scene, FreeCamera, Vector3, Vector2, Color3, Texture, ShadowGenerator, DirectionalLight, HemisphericLight, MeshBuilder, StandardMaterial, CubeTexture, Behavior } from "@babylonjs/core"
+import {
+  Engine, Scene, FreeCamera, Vector3, Vector2, Color3, Texture,
+  ShadowGenerator, DirectionalLight, HemisphericLight, MeshBuilder,
+  StandardMaterial, CubeTexture
+} from "@babylonjs/core"
 import { MixMaterial, WaterMaterial } from "@babylonjs/materials"
 import legoMan from './components/legoman'
 import useWS, { WSClass } from '../utils/websocket'
