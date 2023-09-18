@@ -1,12 +1,15 @@
 {
-  "name": "json-bp",
+  "name": "landing",
   "version": "0.0.0",
-  "description": "building business process interfaces",
+  "description": "",
   "author": "ZinovNikita",
-  "homepage": "https://github.com/ZinovNikita/landing#readme",
+  "homepage": "https://zinovnikita.github.io/landing/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZinovNikita/landing.git"
+  },
+  "customParams": {
+    "base": "/landing"
   },
   "bugs": {
     "url": "https://github.com/ZinovNikita/landing/issues"
@@ -19,23 +22,29 @@
   ],
   "type": "module",
   "scripts": {
+    "ws": "node websocket.js",
     "dev": "vite",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc & vite build",
     "preview": "vite preview"
   },
   "directories": {
     "doc": "docs"
   },
   "dependencies": {
+    "@babylonjs/core": "^6.19.1",
+    "@babylonjs/materials": "^6.20.0",
     "ant-design-vue": "^4.0.0",
     "jsoneditor": "^9.10.2",
+    "sass": "^1.66.1",
     "vue": "^3.2.47",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@types/jsoneditor": "^9.9.0",
+    "@types/node": "^20.5.8",
     "@vitejs/plugin-vue": "^4.1.0",
     "gh-pages": "^6.0.0",
     "typescript": "^5.0.2",
